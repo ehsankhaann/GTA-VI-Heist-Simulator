@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An interactive GTA VI themed Heist Simulator — plan the crew, gear up and make the score.">
+  <title>GTA VI Heist Simulator — Vice City Edition</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Animated Vice City backdrop -->
+  <div class="backdrop" aria-hidden="true">
+    <div class="sun"></div>
+    <div class="glow-orb orb-one"></div>
+    <div class="glow-orb orb-two"></div>
+    <div class="skyline">
+      <span style="--h:120px;--d:0s"></span>
+      <span style="--h:190px;--d:.4s"></span>
+      <span style="--h:150px;--d:.8s"></span>
+      <span style="--h:240px;--d:.2s"></span>
+      <span style="--h:170px;--d:.6s"></span>
+      <span style="--h:210px;--d:1s"></span>
+      <span style="--h:135px;--d:.3s"></span>
+      <span style="--h:260px;--d:.7s"></span>
+      <span style="--h:180px;--d:.1s"></span>
+      <span style="--h:145px;--d:.9s"></span>
+    </div>
+    <div class="road">
+      <div class="road-line"></div>
+      <div class="car">🚗</div>
+    </div>
+    <div class="palm palm-left">🌴</div>
+    <div class="palm palm-right">🌴</div>
+  </div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <div class="app" id="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-gta">GTA</span><span class="brand-vi">VI</span>
+        <span class="brand-sub">HEIST SIMULATOR</span>
+      </div>
+      <div class="location"><span class="dot"></span> VICE CITY <span class="sep">/</span> CREW HQ</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">// MISSION BRIEFING 01</p>
+        <h1 class="neon-title" data-text="THE BIG SCORE">THE BIG SCORE</h1>
+        <p class="tagline">Cash. Wheels. A partner. Firepower.<br>Miss one, and the whole plan goes sideways.</p>
+        <div class="status-pill" id="statusPill">● STANDBY — CONFIGURE YOUR CREW</div>
+      </section>
+
+      <section class="panels">
+        <div class="panel setup-panel">
+          <div class="panel-title">
+            <span class="panel-icon">🗂️</span>
+            <h2>Heist Setup</h2>
+            <span class="panel-tag">PREP PHASE</span>
+          </div>
+
+          <div class="field">
+            <div class="field-head">
+              <label for="moneyRange">Cash on hand</label>
+              <span class="money-readout" id="moneyValue">$15,000</span>
+            </div>
+            <input type="range" id="moneyRange" min="0" max="30000" step="500" value="15000"
+                   aria-label="Cash on hand">
+            <div class="range-scale"><span>$0</span><span>$10K MINIMUM</span><span>$30K</span></div>
+            <div class="money-bar"><div class="money-bar-fill" id="moneyBarFill"></div></div>
+          </div>
+
+          <div class="field">
+            <div class="field-head"><label>Gear checklist</label><span class="hint">tap to toggle</span></div>
+            <div class="toggles">
+              <button type="button" class="toggle is-on" data-key="gateWayCar" aria-pressed="true">
+                <span class="toggle-icon">🚙</span>
+                <span class="toggle-copy"><strong>Gateway Car</strong><small>Your ride out</small></span>
+                <span class="toggle-switch"></span>
+              </button>
+              <button type="button" class="toggle" data-key="partner" aria-pressed="false">
+                <span class="toggle-icon">🕶️</span>
+                <span class="toggle-copy"><strong>Partner</strong><small>Someone you trust</small></span>
+                <span class="toggle-switch"></span>
+              </button>
+              <button type="button" class="toggle is-on" data-key="weapon" aria-pressed="true">
+                <span class="toggle-icon">🔫</span>
+                <span class="toggle-copy"><strong>Weapon</strong><small>No bare fists</small></span>
+                <span class="toggle-switch"></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btn btn-primary" id="runBtn">▶ START HEIST</button>
+            <button type="button" class="btn btn-ghost" id="resetBtn">↺ DEFAULTS</button>
+            <button type="button" class="btn btn-ghost" id="clearBtn">✕ CLEAR LOG</button>
+          </div>
+        </div>
+
+        <div class="panel terminal-panel">
+          <div class="panel-title">
+            <span class="panel-icon">💻</span>
+            <h2>Mission Control</h2>
+            <span class="panel-tag live"><span class="dot"></span> LIVE</span>
+          </div>
+          <div class="terminal" id="terminal">
+            <div class="terminal-bar">
+              <span class="term-dots"><i></i><i></i><i></i></span>
+              <span>crew@ ViceCity:~ /heist</span>
+            </div>
+            <div class="terminal-body" id="output">
+              <p class="line muted"><span class="prompt">›</span> Awaiting your orders, boss. Hit START HEIST.</p>
+            </div>
+          </div>
+          <div class="checklist" id="checklist" aria-live="polite"></div>
+        </div>
+      </section>
+    </main>
+
+    <section class="letter" aria-label="A message for you">
+      <div class="letter-inner">
+        <span class="letter-label">A LITTLE NOTE FOR YOU</span>
+        <h2>Keep grinding, champ.</h2>
+        <p>I know you feel sad because you're feeling like left behind. You can't afford GTA VI or PS5...I understand that. But Don't worry, be positive and grind smart &amp; hard and you'll achive every video game of the world! I belive in you champ:) </p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>Made from the original console script · logic untouched, interface upgraded</span>
+      <span class="footer-mark">VICE CITY · EST. 1986</span>
+    </footer>
+  </div>
+
+  <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+  <div class="flash" id="flash" aria-hidden="true"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
